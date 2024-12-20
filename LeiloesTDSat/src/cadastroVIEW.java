@@ -1,3 +1,9 @@
+
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -9,11 +15,16 @@
  */
 public class cadastroVIEW extends javax.swing.JFrame {
 
+     private JTable tbllistaProdutos;
     /**
      * Creates new form cadastroVIEW
      */
     public cadastroVIEW() {
         initComponents();
+        tbllistaProdutos = new JTable(new DefaultTableModel(
+            new Object[][]{},
+            new String[]{"ID", "Nome", "Valor", "Status"}
+        )); // Inicialização da tabela
     }
 
     /**
@@ -34,7 +45,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         btnCadastrar = new javax.swing.JButton();
-        btnProdutos = new javax.swing.JButton();
+        btnConsultar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,10 +74,10 @@ public class cadastroVIEW extends javax.swing.JFrame {
             }
         });
 
-        btnProdutos.setText("Consultar Produtos");
-        btnProdutos.addActionListener(new java.awt.event.ActionListener() {
+        btnConsultar.setText("Consultar Produtos");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProdutosActionPerformed(evt);
+                btnConsultarActionPerformed(evt);
             }
         });
 
@@ -85,7 +96,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
@@ -127,7 +138,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
-                .addComponent(btnProdutos)
+                .addComponent(btnConsultar)
                 .addGap(22, 22, 22))
         );
 
@@ -151,12 +162,29 @@ public class cadastroVIEW extends javax.swing.JFrame {
         ProdutosDAO produtodao = new ProdutosDAO();
         produtodao.cadastrarProduto(produto);
         
+        JOptionPane.showMessageDialog (null, "Cadastro realizado com sucesso!");
+        
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
-    private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
-        listagemVIEW listagem = new listagemVIEW(); 
-        listagem.setVisible(true);
-    }//GEN-LAST:event_btnProdutosActionPerformed
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+            try{
+                ProdutosDAO produtoDAO = new ProdutosDAO();
+                ArrayList<ProdutosDTO> produtos = produtoDAO.listarProdutos();
+
+                DefaultTableModel model = (DefaultTableModel) tbllistaProdutos.getModel();
+                model.setRowCount(0); // Limpa a tabela
+
+                for (ProdutosDTO produto : produtos) {
+                    model.addRow(new Object[]{produto.getId(), produto.getNome(), produto.getValor(), produto.getStatus()});
+            }
+
+                listagemVIEW listagem = new listagemVIEW(); 
+                listagem.setVisible(true);
+            }catch (Exception e){ //Tratamento mais expecífico para SQLException
+                JOptionPane.showMessageDialog(this, "Erro ao consultar produtos: " + e.getMessage());
+        }
+                
+    }//GEN-LAST:event_btnConsultarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,7 +223,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
-    private javax.swing.JButton btnProdutos;
+    private javax.swing.JButton btnConsultar;
     private javax.swing.JTextField cadastroNome;
     private javax.swing.JTextField cadastroValor;
     private javax.swing.JLabel jLabel1;
