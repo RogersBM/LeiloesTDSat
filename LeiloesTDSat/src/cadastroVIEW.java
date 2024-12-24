@@ -157,7 +157,8 @@ public class cadastroVIEW extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, "Novo produto cadastrado com sucesso.");
             
-             } catch( Exception e ) {
+            
+            } catch( Exception e ) {
             JOptionPane.showMessageDialog( this, "Ocorreu uma falha:\n" + e.getMessage() );
         }
 
