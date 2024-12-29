@@ -52,6 +52,9 @@ public class ProdutosDAO {
         }
         return produtos;
     }
-              
+    
+    public void venderProduto (ProdutosDTO p){
+        // .....
+    }
 }
 
