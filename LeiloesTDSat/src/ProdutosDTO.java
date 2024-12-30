@@ -1,12 +1,12 @@
 
 /**
  *
- * @author Adm
+ * @author Rudy Rogers
  */
 public class ProdutosDTO {
-    private Integer id;
+    private int id;
     private String nome;
-    private Integer valor;
+    private int valor;
     private String status;
 
     public Integer getId() {
@@ -33,7 +33,7 @@ public class ProdutosDTO {
         this.nome = nome;
     }
 
-    public void setValor(Integer valor) {
+    public void setValor(int valor) {
         this.valor = valor;
     }
 
