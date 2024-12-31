@@ -148,10 +148,10 @@ public class listagemVIEW extends javax.swing.JFrame {
             VendasVIEW vendas = new VendasVIEW(); 
             vendas.setVisible(true);
             vendas.setLocationRelativeTo(null);
-            this.dispose();
-        
+            this.dispose();        
     }//GEN-LAST:event_btnConsultarVendasActionPerformed
 
+    
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
             cadastroVIEW cadastro = new cadastroVIEW();
             cadastro.setVisible(true);
