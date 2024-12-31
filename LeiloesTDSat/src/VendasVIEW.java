@@ -168,5 +168,4 @@ public class VendasVIEW extends javax.swing.JFrame {
                                 
             }
      }
-
 }
