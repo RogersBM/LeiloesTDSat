@@ -140,6 +140,7 @@ public class listagemVIEW extends javax.swing.JFrame {
                 id_produto_venda.setText("");
                 id_produto_venda.requestFocus();
                 this.listarProdutos();
+                
             }
     }//GEN-LAST:event_btnVenderActionPerformed
 
